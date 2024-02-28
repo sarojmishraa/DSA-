@@ -1,0 +1,26 @@
+class Solution {
+public:
+
+    void removePart(string& s,string part){
+
+        int find = s.find(part);
+
+        int i=find;
+        if(find==string::npos){
+            return;
+        }
+        else{
+            s.erase(i,part.length());
+
+        }
+            removePart(s,part);
+    }
+    
+
+    string removeOccurrences(string& s, string part) {
+
+
+        removePart(s,part);
+        return s;
+    }
+}
