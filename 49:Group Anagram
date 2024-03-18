@@ -1,0 +1,43 @@
+//about C++:
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, int> mp;
+        vector<vector<string>> ans; 
+
+        for (int i = 0; i < strs.size(); i++) {
+            string temp = strs[i];
+            sort(temp.begin(), temp.end());
+            if (mp.find(temp) != mp.end()) {
+                ans[mp[temp]].push_back(strs[i]);
+            } else {
+                mp[temp] = ans.size();
+                ans.push_back({strs[i]});
+                
+            }
+        }
+
+        return ans;
+    }
+};
+
+
+//JAVA CODE
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for(String s: strs){
+            char[] ch = s.toCharArray();
+            Arrays.sort(ch);
+            String sorted = new String(ch);
+            if(!map.containsKey(sorted)){
+                map.put(sorted, new LinkedList<String>());
+            }
+            map.get(sorted).add(s);
+        }
+        return new LinkedList<>(map.values());
+    }
+}
+
